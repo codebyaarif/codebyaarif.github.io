@@ -62,6 +62,18 @@ const projects = [
   },
 ];
 
+window.addEventListener("load", () => {
+  const loader = document.getElementById("page-loader");
+
+  if (!loader) return;
+
+  loader.classList.add("loaded");
+
+  setTimeout(() => {
+    loader.remove();
+  }, 800);
+});
+
 // ========================================
 // NAVBAR ELEMENTS
 // ========================================
