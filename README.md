@@ -1,4 +1,4 @@
-# Aarif Khan Portfolio
+# Portfolio
 
 A responsive personal portfolio website built with HTML, CSS, and JavaScript.
 
