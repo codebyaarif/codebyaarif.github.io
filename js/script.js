@@ -3,7 +3,7 @@ const projects = [
     addClass: "php",
     title: "Online Discussion Forum",
     img: "./img/od1.png",
-    githubLink: "https://github.com/aarifkhan7896",
+    githubLink: "https://github.com/codebyaarif",
     desc: `It was 
   developed using PHP in which registered 
   users can ask questions or post answers to 
@@ -14,7 +14,7 @@ const projects = [
     addClass: "javascript",
     title: "Todo App",
     img: "./img/Todo.png",
-    githubLink: "https://aarifkhan7896.github.io/todo.github.io/",
+    githubLink: "https://codebyaarif.github.io/todo.github.io/",
     desc: `TODO List is the list that we generally
    use to maintain our day-to-day. 
   It is helpful in planning our daily schedules.
@@ -24,14 +24,14 @@ const projects = [
     addClass: "ui",
     title: "eShop",
     img: "./img/eShop.png",
-    githubLink: "https://aarifkhan7896.github.io/ecommerce.github.io/",
+    githubLink: "https://codebyaarif.github.io/ecommerce.github.io/",
     desc: `Electronic Commerce or E-commerce is a platform for buying or selling products over the Internet.`,
   },
   {
     addClass: "php",
     title: "Library Management System",
     img: "./img/sl1.png",
-    githubLink: "https://github.com/aarifkhan7896",
+    githubLink: "https://github.com/codebyaarif",
     desc: `A library 
   management system is designed & 
   developed to manage all the in-house 
@@ -41,7 +41,7 @@ const projects = [
     addClass: "javascript",
     title: "Calculator",
     img: "./img/Calc.png",
-    githubLink: "https://github.com/aarifkhan7896",
+    githubLink: "https://github.com/codebyaarif",
     desc: `A simple calculator with HTML, CSS and JavaScript
   to perform basic math operations.`,
   },
@@ -49,7 +49,7 @@ const projects = [
     addClass: "ui",
     title: "Starbucks",
     img: "./img/Starbucks.png",
-    githubLink: "https://github.com/aarifkhan7896",
+    githubLink: "https://github.com/codebyaarif",
     desc: `A simple Starbucks Landing page built using HTML, CSS, and JavaScript.`,
   },
   ,
@@ -57,7 +57,7 @@ const projects = [
     addClass: "ui",
     title: "Times of India",
     img: "./img/toi.png",
-    githubLink: "https://github.com/aarifkhan7896",
+    githubLink: "https://github.com/codebyaarif",
     desc: `A simple Times of India clone built using HTML, CSS, and JavaScript.`,
   },
 ];
@@ -169,19 +169,51 @@ navLinks.forEach((link) => {
 
 const allProjects = document.querySelector("#projects");
 const projectLink = document.querySelectorAll(".projectLink");
+let filterChangeId = 0;
+
+function setProjectFilter(filter) {
+  const changeId = ++filterChangeId;
+  const projectCards = document.querySelectorAll(".projectCard");
+
+  projectLink.forEach((link) => {
+    const isActive = link.dataset.filter === filter;
+    link.classList.toggle("project-filter__item--active", isActive);
+    link.setAttribute("aria-pressed", String(isActive));
+  });
+
+  projectCards.forEach((card) => {
+    const isVisible = filter === "all" || card.classList.contains(filter);
+
+    if (isVisible) {
+      card.hidden = false;
+      card.classList.remove("is-visible");
+      window.setTimeout(
+        () => {
+          if (changeId !== filterChangeId) return;
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (changeId === filterChangeId) {
+                card.classList.add("is-visible");
+              }
+            });
+          });
+        },
+        Array.from(projectCards).indexOf(card) * 45,
+      );
+      return;
+    }
+
+    card.classList.remove("is-visible");
+    window.setTimeout(() => {
+      if (changeId === filterChangeId) card.hidden = true;
+    }, 350);
+  });
+}
 
 projectLink.forEach((element) => {
   element.addEventListener("click", (e) => {
-    const filter = e.currentTarget.dataset.filter;
-    const projectCards = document.querySelectorAll(".projectCard");
-
-    projectCards.forEach((card) => {
-      if (filter === "all" || card.classList.contains(filter)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
+    setProjectFilter(e.currentTarget.dataset.filter);
   });
 });
 
@@ -234,6 +266,7 @@ if (allProjects && typeof projects !== "undefined") {
 
   allProjects.innerHTML = ""; // Clear existing content
   allProjects.appendChild(fragment);
+  setProjectFilter("all");
 }
 
 // ========================================

@@ -192,12 +192,17 @@ footer {
   width: fit-content;
   display: flex;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 1.2rem;
-  background: rgba(24, 27, 32, 0.94);
+  background: rgba(24, 27, 32, 0.78);
   box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+#navbar .nav:hover {
+  background: rgba(24, 27, 32, 0.88);
+  border-color: rgba(255, 255, 255, 0.24);
 }
 #navbar .nav ul {
   margin: 0;
@@ -219,6 +224,13 @@ footer {
   font-weight: 600;
   letter-spacing: 0.01em;
   border-radius: 0.85rem;
+}
+#navbar .nav ul li a .nav-link-icon {
+  display: inline-block;
+  width: 2rem;
+  margin-right: 0.8rem;
+}
+#navbar .nav ul li a {
   transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s var(--ease);
 }
 #navbar .nav ul li a::after {
@@ -489,6 +501,51 @@ footer {
   background: var(--accentColor);
   border-radius: 99px;
 }
+#myProjects .project-filter {
+  width: min(100%, 62rem);
+  margin: 0 auto 3.5rem;
+  padding: 0 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+#myProjects .project-filter__item {
+  min-height: 4.4rem;
+  padding: 0.8rem 1.2rem;
+  border: 0;
+  border-bottom: 1px solid var(--borderColor);
+  background: transparent;
+  color: var(--mutedColor);
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: block;
+  text-align: center;
+}
+#myProjects .project-filter__item i {
+  display: block;
+  line-height: 1;
+  margin: 0 auto;
+}
+#myProjects .project-filter__item {
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+#myProjects .project-filter__item:hover {
+  color: var(--secondaryColor);
+  border-bottom-color: var(--accentColor);
+  transform: translateY(-0.1rem);
+}
+#myProjects .project-filter__item:focus-visible {
+  outline: 0.2rem solid var(--accentColor);
+  outline-offset: 0.2rem;
+}
+#myProjects .project-filter__item--active {
+  display: block;
+  color: var(--accentColor);
+}
+#myProjects .project-filter__item--active:hover {
+  color: var(--accentColor);
+}
 #myProjects .projectCard {
   width: min(40rem, 100%);
   margin: 1.5rem auto;
@@ -497,7 +554,18 @@ footer {
   border-radius: var(--radius);
   background: var(--surfaceColor);
   box-shadow: 0 1.5rem 4rem var(--shadowColor);
-  transition: transform 0.4s var(--ease), box-shadow 0.4s ease, border-color 0.3s ease;
+  transition: opacity 0.35s var(--ease), transform 0.45s var(--ease), box-shadow 0.4s ease, border-color 0.3s ease;
+  will-change: opacity, transform;
+  opacity: 0;
+  transform: translateY(1rem);
+}
+#myProjects .projectCard.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: projectCardSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+#myProjects .projectCard[hidden] {
+  display: none;
 }
 #myProjects .projectCard:hover {
   transform: translateY(-0.8rem);
@@ -533,6 +601,16 @@ footer {
   line-height: 1.7;
 }
 
+@keyframes projectCardSlideUp {
+  from {
+    opacity: 0.01;
+    transform: translateY(4rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* =========================================================
    SOCIAL / FOOTER
    ========================================================= */
@@ -670,21 +748,36 @@ footer span {
     transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.45s var(--ease);
   }
   #navbar .nav ul {
-    width: min(34rem, 90%);
+    width: min(42rem, 100% - 2rem);
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.7rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3rem;
   }
   #navbar .nav ul li {
-    width: 100%;
+    opacity: 0;
+    transform: translateY(0.8rem);
+    transition: opacity 0.3s ease, transform 0.3s var(--ease);
+    flex: 1 1 0;
+    min-width: 0;
   }
   #navbar .nav ul li a {
     width: 100%;
-    padding: 1.5rem 2rem;
-    font-size: 2.1rem;
+    padding: 0.8rem 0.3rem;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    color: var(--secondaryColor);
     border: 1px solid transparent;
     border-radius: 1.2rem;
+  }
+  #navbar .nav ul li a .nav-link-icon {
+    display: inline-block;
+    width: auto;
+    margin-right: 0;
+    color: var(--accentColor);
+    font-size: 1.7rem;
   }
   #navbar .nav ul li a::after {
     left: 25%;
@@ -692,6 +785,7 @@ footer span {
     bottom: 0.7rem;
   }
   #navbar .nav ul li a:hover {
+    color: var(--secondaryColor);
     border-color: var(--borderColor);
   }
   #navbar .nav #closeBar {
@@ -709,6 +803,22 @@ footer span {
     visibility: visible;
     pointer-events: auto;
     transform: translateY(0);
+  }
+  #navbar.menu-open .nav ul li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #navbar.menu-open .nav ul li:nth-child(1) {
+    transition-delay: 0.08s;
+  }
+  #navbar.menu-open .nav ul li:nth-child(2) {
+    transition-delay: 0.13s;
+  }
+  #navbar.menu-open .nav ul li:nth-child(3) {
+    transition-delay: 0.18s;
+  }
+  #navbar.menu-open .nav ul li:nth-child(4) {
+    transition-delay: 0.23s;
   }
   /* ONLY CHANGES: reduced top spacing + centering */
   #main {
@@ -751,6 +861,23 @@ footer span {
   #myProjects .projectCard {
     margin: 1.5rem auto;
   }
+  #myProjects .project-filter__item {
+    padding: 0;
+    gap: 0.4rem;
+    font-size: 1.15rem;
+    display: block;
+    text-align: center;
+  }
+  #myProjects .project-filter__item i {
+    display: block;
+    margin-right: 0;
+    flex: 0 0 auto;
+    font-size: 1.25rem;
+  }
+  #myProjects .project-filter__item .project-filter__label {
+    display: inline;
+    line-height: 1;
+  }
 }
 /* =========================================================
    SMALL PHONES
@@ -758,6 +885,9 @@ footer span {
 @media only screen and (max-width: 450px) {
   html {
     font-size: 47%;
+  }
+  #myProjects .project-filter {
+    grid-template-columns: repeat(2, 1fr);
   }
   #navbar {
     padding: 0 1rem;
@@ -796,6 +926,12 @@ footer span {
     width: 4.4rem;
     height: 4.4rem;
     font-size: 1.8rem;
+  }
+}
+@media only screen and (min-width: 1001px) {
+  #navbar .nav ul li a {
+    display: inline-block;
+    transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s var(--ease);
   }
 }
 /* =========================================================

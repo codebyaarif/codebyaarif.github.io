@@ -29,10 +29,33 @@
       <!-- Navigation -->
       <nav class="nav" id="nav">
         <ul>
-          <li><a href="#main">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#myProjects">Project</a></li>
-          <li><a href="#social">Contact</a></li>
+          <li>
+            <a href="#main"
+              ><i class="fas fa-home nav-link-icon" aria-hidden="true"></i
+              >Home</a
+            >
+          </li>
+          <li>
+            <a href="#about"
+              ><i class="fas fa-user nav-link-icon" aria-hidden="true"></i
+              >About</a
+            >
+          </li>
+          <li>
+            <a href="#myProjects"
+              ><i
+                class="fas fa-folder-open nav-link-icon"
+                aria-hidden="true"
+              ></i
+              >Project</a
+            >
+          </li>
+          <li>
+            <a href="#social"
+              ><i class="fas fa-envelope nav-link-icon" aria-hidden="true"></i
+              >Contact</a
+            >
+          </li>
         </ul>
 
         <!-- Mobile close button -->
@@ -112,30 +135,43 @@
       <div class="text-center">
         <h1>Some Things I’ve Built</h1>
       </div>
-      <div class="listItems text-center">
-        <ul>
-          <li class="btn btn-success fs-4 mx-3 projectLink" data-filter="all">
-            All
-          </li>
-          <li
-            class="btn btn-outline-success fs-4 mx-3 projectLink"
-            data-filter="javascript"
-          >
-            Javascript
-          </li>
-          <li
-            class="btn btn-outline-success fs-4 mx-3 projectLink"
-            data-filter="php"
-          >
-            PHP
-          </li>
-          <li
-            class="btn btn-outline-success fs-4 mx-3 projectLink"
-            data-filter="ui"
-          >
-            UI
-          </li>
-        </ul>
+      <div class="project-filter" role="group" aria-label="Filter projects">
+        <button
+          class="project-filter__item project-filter__item--active projectLink"
+          type="button"
+          data-filter="all"
+          aria-pressed="true"
+        >
+          <i class="fas fa-layer-group" aria-hidden="true"></i>
+          <span class="project-filter__label">All projects</span>
+        </button>
+        <button
+          class="project-filter__item projectLink"
+          type="button"
+          data-filter="javascript"
+          aria-pressed="false"
+        >
+          <i class="fas fa-code" aria-hidden="true"></i>
+          <span class="project-filter__label">JavaScript</span>
+        </button>
+        <button
+          class="project-filter__item projectLink"
+          type="button"
+          data-filter="php"
+          aria-pressed="false"
+        >
+          <i class="fas fa-database" aria-hidden="true"></i>
+          <span class="project-filter__label">PHP</span>
+        </button>
+        <button
+          class="project-filter__item projectLink"
+          type="button"
+          data-filter="ui"
+          aria-pressed="false"
+        >
+          <i class="fas fa-palette" aria-hidden="true"></i>
+          <span class="project-filter__label">UI design</span>
+        </button>
       </div>
       <div
         id="projects"
@@ -153,7 +189,7 @@
         </div>
         <ul>
           <li>
-            <a href="https://www.facebook.com/aarifkhan7896/" target="_blank">
+            <a href="https://www.facebook.com/aarif.irl/" target="_blank">
               <i class="fab fa-facebook"></i>
             </a>
           </li>
@@ -168,7 +204,7 @@
             </a>
           </li>
           <li>
-            <a href="https://twitter.com/aarifkhan7896" target="_blank">
+            <a href="https://twitter.com/aarifk_" target="_blank">
               <i class="fab fa-twitter"></i>
             </a>
           </li>
