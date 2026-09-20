@@ -30,8 +30,8 @@
   --backgroundColor: #15171b;
   --secondaryColor: #f4f5f7;
   --mutedColor: #a7adb8;
-  --containerColor: rgba(25, 28, 34, 0.82);
-  --surfaceColor: rgba(31, 35, 42, 0.78);
+  --containerColor: #191c22;
+  --surfaceColor: #1f232a;
   --barColor: #252a31;
   --gridColor: rgba(255, 255, 255, 0.035);
   --socialColor: #0f1114;
@@ -39,7 +39,7 @@
   --accentSoft: rgba(155, 147, 255, 0.15);
   --borderColor: rgba(255, 255, 255, 0.1);
   --shadowColor: rgba(0, 0, 0, 0.28);
-  --mouseGradient: rgba(155, 147, 255, 0.11);
+  --mouseGradient: transparent;
 }
 
 /* =========================================================
@@ -243,7 +243,7 @@ footer {
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 1.2rem;
 
-    background: rgba(24, 27, 32, 0.78);
+    background: var(--barColor);
 
     box-shadow:
       0 0.6rem 2rem rgba(0, 0, 0, 0.16),
@@ -257,8 +257,8 @@ footer {
       box-shadow 0.35s ease;
 
     &:hover {
-      background: rgba(24, 27, 32, 0.88);
-      border-color: rgba(255, 255, 255, 0.24);
+      background: var(--barColor);
+      border-color: var(--borderColor);
     }
 
     ul {
@@ -281,7 +281,7 @@ footer {
 
           padding: 0.9rem 1.2rem;
 
-          color: rgba(255, 255, 255, 0.78);
+          color: var(--secondaryColor);
 
           font-size: 1.55rem;
           font-weight: 600;
@@ -322,7 +322,7 @@ footer {
           }
 
           &:hover {
-            color: #fff;
+            color: var(--secondaryColor);
 
             transform: translateY(-1px);
 
@@ -922,19 +922,23 @@ footer {
       align-items: center;
       justify-content: center;
       overflow-y: auto;
-      background:
-        radial-gradient(circle at 50% 20%, var(--accentSoft), transparent 35%),
-        var(--containerColor);
+      background: var(--containerColor);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translateY(-1.5rem);
+      transform: scale(0.01);
+      transform-origin: top left;
+      will-change: opacity, transform;
       transition:
-        opacity 0.35s ease,
+        opacity 0.45s ease,
         visibility 0.35s ease,
-        transform 0.45s var(--ease);
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+      &:hover {
+        background: var(--containerColor);
+      }
 
       ul {
         width: min(42rem, calc(100% - 2rem));
@@ -1004,7 +1008,7 @@ footer {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
-        transform: translateY(0);
+        transform: scale(1);
 
         ul li {
           opacity: 1;

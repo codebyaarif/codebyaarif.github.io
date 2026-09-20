@@ -100,7 +100,8 @@ if (darkIcon) {
 
 // Toggle dark/light mode
 if (dark) {
-  dark.addEventListener("click", () => {
+  dark.addEventListener("click", (event) => {
+    event.stopPropagation();
     const isDark = document.body.classList.contains("toggle");
 
     if (isDark) {
@@ -131,7 +132,8 @@ const navbar = document.getElementById("navbar");
 
 // Open menu
 if (bar && nav && navbar) {
-  bar.addEventListener("click", () => {
+  bar.addEventListener("click", (event) => {
+    event.stopPropagation();
     nav.classList.add("active");
     navbar.classList.add("menu-open");
 
@@ -142,7 +144,8 @@ if (bar && nav && navbar) {
 
 // Close menu
 if (closeBar && nav && navbar) {
-  closeBar.addEventListener("click", () => {
+  closeBar.addEventListener("click", (event) => {
+    event.stopPropagation();
     nav.classList.remove("active");
     navbar.classList.remove("menu-open");
 
